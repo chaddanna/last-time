@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { FormLabel, FormInput, Button } from "react-native-elements";
 
-import { FormLabel, FormInput } from "react-native-elements";
+import defaultStyles from "./default-styles";
 
 class AddTracker extends Component {
   static navigationOptions = {
@@ -10,19 +11,23 @@ class AddTracker extends Component {
 
   render() {
     return (
-      <View>
-        <FormLabel>Name</FormLabel>
-        <FormInput />
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <FormLabel>Name</FormLabel>
+          <FormInput />
+        </View>
+        <View style={styles.actions}>
+          <Button title="Add" large />
+        </View>
       </View>
     );
   }
 }
 
+console.log("defaultStyles: ", defaultStyles);
+
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: "#F7F7F7"
-  }
+  ...defaultStyles
 });
 
 export default AddTracker;

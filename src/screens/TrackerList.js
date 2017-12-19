@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button, List, ListItem } from "react-native-elements";
 
+import defaultStyles from "./default-styles";
+
 class TrackerList extends Component {
   render() {
     return (
@@ -26,24 +28,19 @@ class TrackerList extends Component {
       const lastDone = tracker.logs[0];
 
       return (
-        <ListItem key={tracker.id} title={tracker.name} subtitle={lastDone} />
+        <ListItem
+          key={tracker.id}
+          title={tracker.name}
+          subtitle={lastDone}
+          onPress={() => this.props.navigation.navigate("details")}
+        />
       );
     });
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F7F7F7"
-  },
-  content: {
-    flex: 3
-  },
-  actions: {
-    flex: 1,
-    justifyContent: "flex-end"
-  }
+  ...defaultStyles
 });
 
 const trackers = [
