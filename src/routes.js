@@ -1,8 +1,8 @@
 import { StackNavigator } from "react-navigation";
 
-import List from "../src/screens/TrackerList";
-import Stats from "../src/screens/Stats";
-import AddTracker from "../src/screens/AddTracker";
+import List from "./screens/TrackerList";
+import AddTracker from "./screens/AddTracker";
+import { Navigator as DetailNavigator } from "./screens/details";
 
 const Navigator = StackNavigator(
   {
@@ -12,8 +12,8 @@ const Navigator = StackNavigator(
         title: "Trackers"
       }
     },
-    stats: {
-      screen: Stats
+    details: {
+      screen: DetailNavigator
     },
     addTracker: {
       screen: AddTracker,
@@ -23,7 +23,7 @@ const Navigator = StackNavigator(
     }
   },
   {
-    initialRouteName: "addTracker"
+    initialRouteName: "details"
   }
 );
 
