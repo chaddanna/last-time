@@ -22,8 +22,6 @@ class AddTracker extends Component {
   }
 }
 
-console.log("defaultStyles: ", defaultStyles);
-
 const styles = StyleSheet.create({
   ...defaultStyles
 });
