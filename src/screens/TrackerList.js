@@ -1,16 +1,39 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { List, ListItem } from "react-native-elements";
 import { Button, Text as NBText } from "native-base";
 
+import firebase from "firebase";
+
 import defaultStyles from "./default-styles";
 
 class TrackerList extends Component {
+  state = {
+    trackers: []
+  };
+
+  async componentDidMount() {
+    const snapshot = await firebase
+      .database()
+      .ref()
+      .once("value");
+
+    const trackers = [];
+    _.forOwn(snapshot.val(), (data, id) => {
+      trackers.push({ ...data, id });
+    });
+
+    this.setState({
+      trackers
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <List>{this.getTrackers(trackers)}</List>
+          <List>{this.getTrackers(this.state.trackers)}</List>
         </View>
 
         <View style={styles.actions}>
@@ -28,9 +51,11 @@ class TrackerList extends Component {
     );
   }
 
-  getTrackers(trackers) {
+  getTrackers(trackers = []) {
+    if (_.isEmpty(trackers)) return;
+
     return trackers.map(tracker => {
-      const lastDone = tracker.logs[0];
+      const lastDone = tracker.logs ? tracker.logs[0] : undefined;
 
       return (
         <ListItem
@@ -47,23 +72,5 @@ class TrackerList extends Component {
 const styles = StyleSheet.create({
   ...defaultStyles
 });
-
-const trackers = [
-  {
-    name: "worked on CSS course",
-    id: "number1",
-    logs: ["friday", "monday"]
-  },
-  {
-    name: "clean room",
-    id: "number2",
-    logs: []
-  },
-  {
-    name: "charged band",
-    id: "number3",
-    logs: []
-  }
-];
 
 export default TrackerList;
