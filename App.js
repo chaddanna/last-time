@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import React, { Component } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-import List from './src/screens/List';
-import Stats from './src/screens/Stats';
+import Navigator from "./src/routes";
 
-export default class App extends Component {
+import firebase from "firebase";
+import config from "./src/secret/firebase";
+
+class App extends Component {
+  componentWillMount() {
+    firebase.initializeApp(config);
+  }
+
   render() {
-    const Navigator = StackNavigator({
-      list: {
-        screen: List
-      },
-      stats: {
-        screen: Stats
-      }
-    });
-
     return (
       <View style={styles.container}>
         <Navigator />
@@ -27,6 +23,8 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: "#fff"
   }
 });
+
+export default App;
