@@ -3,7 +3,14 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Navigator from "./src/routes";
 
-export default class App extends Component {
+import firebase from "firebase";
+import config from "./src/secret/firebase";
+
+class App extends Component {
+  componentWillMount() {
+    firebase.initializeApp(config);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -19,3 +26,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   }
 });
+
+export default App;
