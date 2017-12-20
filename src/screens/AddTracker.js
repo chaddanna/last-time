@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { FormLabel, FormInput, Button } from "react-native-elements";
+import { FormLabel, FormInput } from "react-native-elements";
+import { Button, Text as NBText } from "native-base";
 
 import defaultStyles from "./default-styles";
 
@@ -17,7 +18,15 @@ class AddTracker extends Component {
           <FormInput />
         </View>
         <View style={styles.actions}>
-          <Button title="Add" large />
+          <Button
+            title="Add Tracker"
+            full
+            large
+            success
+            onPress={() => this.props.navigation.navigate("addTracker")}
+          >
+            <NBText>Add Tracker</NBText>
+          </Button>
         </View>
       </View>
     );

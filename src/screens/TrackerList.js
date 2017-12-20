@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { Button, List, ListItem } from "react-native-elements";
+import { List, ListItem } from "react-native-elements";
+import { Button, Text as NBText } from "native-base";
 
 import defaultStyles from "./default-styles";
 
@@ -15,9 +16,13 @@ class TrackerList extends Component {
         <View style={styles.actions}>
           <Button
             title="Add Tracker"
+            full
             large
+            info
             onPress={() => this.props.navigation.navigate("addTracker")}
-          />
+          >
+            <NBText>Add Tracker</NBText>
+          </Button>
         </View>
       </View>
     );
